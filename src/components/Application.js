@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import DayList from "./DayList";
 import "components/Application.scss";
+import Appointment from "components/Appointment";
+
 const days = [
   {
     id: 1,
@@ -19,9 +21,53 @@ const days = [
   },
 ];
 
+const appointments = [
+  {
+    id: 1,
+    time: "12pm",
+  },
+  {
+    id: 2,
+    time: "1pm",
+    interview: {
+      student: "Lydia Miller-Jones",
+      interviewer: {
+        id: 1,
+        name: "Sylvia Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  },
+  {
+    id: 3,
+    time: "2pm",
+  },
+  {
+    id: 4,
+    time: "3pm",
+    interview: {
+      student: "Lydia Miller-Jones",
+      interviewer: {
+        id: 1,
+        name: "Sylvia Palmer",
+        avatar: "https://i.imgur.com/LpaY82x.png",
+      }
+    }
+  },
+  {
+    id: 5,
+    time: "4pm",
+  },
+];
+
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
-
+  const app_schedule = appointments.map(appointment =>
+    {
+      return(
+        <Appointment key={appointment.id} {...appointment} />
+      )
+    })
   return (
     <main className="layout">
       <section className="sidebar">
@@ -47,8 +93,18 @@ export default function Application(props) {
       
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        {
+          app_schedule
+        }
       </section>
+      <li className="interviewers__item">
+          <img
+          className="interviewers__item-image"
+          src="https://i.imgur.com/LpaY82x.png"
+          alt="Sylvia Palmer"
+       />
+       Sylvia Palmer
+      </li>
     </main>
   );
 }

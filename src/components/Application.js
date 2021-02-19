@@ -6,6 +6,7 @@ import Appointment from "components/Appointment";
 
 import { getAppointmentsForDay ,getInterview, getInterviewersForDay }   from "helpers/selectors"
 
+
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
@@ -15,6 +16,30 @@ export default function Application(props) {
   });
   
   const setDay = day => setState({ ...state, day });
+
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  const interviewers_schedule  = getInterviewersForDay(state, state.day);
+
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.put(`/api/appointments/${id}`, {interview})
+    .then(()=>{
+      setState({
+        ...state,
+        appointments
+      });
+    })
+    
+  }
 
   useEffect(() => {
     Promise.all([
@@ -31,12 +56,9 @@ export default function Application(props) {
       //console.log(state)
     });
   },[state])
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
   
   const app_schedule = dailyAppointments.map(appointment =>
-    { const interview = getInterview(state, appointment.interview);
-
-    const interviewers_schedule  = getInterviewersForDay(state, state.day);
+    { const interview = getInterview(state, appointment.interview)
 
       return(
         <Appointment  
@@ -45,6 +67,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers_schedule}
+        bookInterview={bookInterview}
       />
       )
     })
@@ -62,6 +85,7 @@ export default function Application(props) {
         days={state.days}
         day={state.day}
         setDay={setDay}
+        
       />
       </nav>
       <img
@@ -75,6 +99,7 @@ export default function Application(props) {
         {
           app_schedule
         }
+        <Appointment key="last" time="5pm"  />
       </section>
     </main>
   );

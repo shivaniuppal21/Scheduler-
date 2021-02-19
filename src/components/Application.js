@@ -4,14 +4,14 @@ import "components/Application.scss";
 import axios from 'axios'
 import Appointment from "components/Appointment";
 
-import getAppointmentsForDay from "helpers/selectors"
+import { getAppointmentsForDay ,getInterview, getInterviewersForDay }   from "helpers/selectors"
 
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    // you may put the line below, but will have to remove/comment hardcoded appointments variable
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
   
   const setDay = day => setState({ ...state, day });
@@ -28,32 +28,37 @@ export default function Application(props) {
       setState(prev => ({...prev, days: all[0].data, 
         appointments: all[1].data, 
         interviewers: all[2].data }));
-        
-      //setDays(all[0].data);
-      //setAppointments(dailyAppointments)
-      console.log(state)
+      //console.log(state)
     });
   },[state])
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   
   const app_schedule = dailyAppointments.map(appointment =>
-    {
+    { const interview = getInterview(state, appointment.interview);
+
+    const interviewers_schedule  = getInterviewersForDay(state, state.day);
+
       return(
-        <Appointment key={appointment.id} {...appointment} />
+        <Appointment  
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+        interviewers={interviewers_schedule}
+      />
       )
     })
-  return (
-    <main className="layout">
-      <section className="sidebar">
-        {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
-        <img
-        className="sidebar--centered"
-        src="images/logo.png"
+      return (
+       <main className="layout">
+        <section className="sidebar">
+          <img
+          className="sidebar--centered"
+          src="images/logo.png"
         alt="Interview Scheduler"
       />
-      <hr className="sidebar__separator sidebar--centered" />
-      <nav className="sidebar__menu">
-      <DayList
+        <hr className="sidebar__separator sidebar--centered" />
+        <nav className="sidebar__menu">
+        <DayList
         days={state.days}
         day={state.day}
         setDay={setDay}
@@ -71,14 +76,6 @@ export default function Application(props) {
           app_schedule
         }
       </section>
-      <li className="interviewers__item">
-          <img
-          className="interviewers__item-image"
-          src="https://i.imgur.com/LpaY82x.png"
-          alt="Sylvia Palmer"
-       />
-       Sylvia Palmer
-      </li>
     </main>
   );
 }

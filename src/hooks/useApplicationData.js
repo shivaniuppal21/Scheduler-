@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
-import {getNewSpotsForDays} from "helpers/selectors";
+import {getNewSpotsForDays} from "../helpers/selectors";
 
 export default function useApplicationData(props) {
     const [state, setState] = useState({

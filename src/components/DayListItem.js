@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import "components/DayListItem.scss";
+import "./DayListItem.scss";
 
 const formatSpots = spots => {
     if (!spots) {

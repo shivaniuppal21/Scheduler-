@@ -37,18 +37,17 @@ export default function Appointment(props) {
     .catch(()=>transition(ERROR_SAVE), true);  
 }
 function remove() {
-  if (mode === CONFIRM) {
-
+  //if (mode === CONFIRM) {
   transition(DELETE,true)
     props.cancelInterview(props.id)
     .then(()=>{
       transition(EMPTY);
     }).catch(()=>{transition(ERROR_DELETE,true)});
   }
-  else{
-    transition(CONFIRM)
-  }
-}
+  //else{
+    //transition(CONFIRM)
+  //}
+//}
   function edit() {
     transition(EDIT);
   }
@@ -60,8 +59,8 @@ function remove() {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete = { remove }
-          onEdit = { edit }
+          onDelete = {()=>transition(CONFIRM)}
+          onEdit = {()=>{transition(EDIT)}}
         />
       )}
        {mode === CREATE &&
@@ -88,5 +87,5 @@ function remove() {
         />
       }
        </article>
-    )
+    );
     }

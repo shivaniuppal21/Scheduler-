@@ -20,7 +20,7 @@ export function getAppointmentsForDay(state, day) {
 
 
     export function getInterview(state, interview) {
-        console.log(interview)
+        //console.log(interview)
             if (!interview) {
         return null;
       }
@@ -40,7 +40,7 @@ export function getAppointmentsForDay(state, day) {
        return []
    }
        const InterviewerArray = filtereddays[0].interviewers;
-       console.log(state)
+       //console.log(state)
    
        const interviwers_schedule = InterviewerArray.map( interviewer =>
            {
@@ -54,7 +54,7 @@ export function getAppointmentsForDay(state, day) {
 
      export function getNewSpotsForDays(state, id){
       const foundDay = state.days.find(day => day.appointments.includes(id));
-      console.log("foundDay: ", foundDay);
+      //console.log("foundDay: ", foundDay);
       const newDays = state.days.map(day=>{
         if (day.id === foundDay.id){
           return {

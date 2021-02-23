@@ -16,15 +16,15 @@ export default function useApplicationData(props) {
         axios.get('/api/appointments'),
         axios.get('/api/interviewers'),
       ]).then((all) => {
-        console.log("days", all[0].data); // first
-        console.log("appointments", all[1].data); // second
-        console.log("interviewers", all[2].data); // third
+        //console.log("days", all[0].data); // first
+        //console.log("appointments", all[1].data); // second
+        //console.log("interviewers", all[2].data); // third
         setState(prev => ({...prev, days: all[0].data, 
           appointments: all[1].data, 
           interviewers: all[2].data }));
         //console.log(state)
       });
-    },[state])
+    },[])
     
     function bookInterview(id, interview) {
      // console.log(id, interview);

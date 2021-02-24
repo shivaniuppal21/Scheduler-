@@ -11,6 +11,8 @@
     6. A user can change the details of an existing interview by pressing the edit icon
     7. A user can cancel an existing interview, a pop-up message will ask to confirm the action before permanently deleting an interview
     8. Days display currently remaining spots and capture updates after each modification
+ ![Alt text]https://github.com/shivaniuppal21/Scheduler-/blob/master/images/Scheduler1.png
+ ![Alt text]https://github.com/shivaniuppal21/Scheduler-/blob/master/images/Scheduler2.png
 
 Install dependencies with `npm install`.
 

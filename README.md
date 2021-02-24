@@ -14,8 +14,8 @@
   ## Daily View
  ![Alt text](https://github.com/shivaniuppal21/Scheduler-/blob/master/images/Scheduler1.png)
  
- 
- ![Alt text]https://github.com/shivaniuppal21/Scheduler-/blob/master/images/Scheduler2.png
+ ## Error Message 
+ ![Alt text](https://github.com/shivaniuppal21/Scheduler-/blob/master/images/Scheduler2.png)
 
 Install dependencies with `npm install`.
 

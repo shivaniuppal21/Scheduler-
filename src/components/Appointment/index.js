@@ -73,7 +73,7 @@ function remove() {
         {mode === SAVING && <Status message="Saving" />}
         {mode === DELETE && <Status message="Deleting" />}
         {mode === CONFIRM && <Confirm onCancel= {back} onConfirm = {remove} message="Are you sure you would like to delete?"/>}
-        {mode === EDIT && (<Form interviewers={props.interviewers} name = {props.name} onSave = {save} onCancel={back}/>)}
+        {mode === EDIT && (<Form interviewers={props.interviewers} interviewer={props.interview.interviewer.id} name = {props.interview.student} onSave = {save} onCancel={back}/>)}
         {mode === ERROR_SAVE && 
         <Error 
           message="Could not create appointment"

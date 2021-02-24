@@ -57,15 +57,14 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
   );
 
   fireEvent.click(queryByAltText(appointment, "Delete"));
-  debug();
-});
+  //debug();
+
 
   expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
 
   fireEvent.click(queryByText(appointment, "Confirm"));
 
   expect(getByText(appointment, "Deleting")).toBeInTheDocument();
-
   await waitForElement(() => getByAltText(appointment, "Add"));
   const day = getAllByTestId(container, "day").find(day =>
     queryByText(day, "Monday")
@@ -73,6 +72,7 @@ it("loads data, cancels an interview and increases the spots remaining for Monda
 
   expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
 });
+ });
 it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
   const { container } = render(<Application />);
   await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -84,12 +84,13 @@ it("loads data, edits an interview and keeps the spots remaining for Monday the 
   fireEvent.click(queryByAltText(appointment, "Edit"));
   fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
   fireEvent.click(getByText(appointment, "Save"));
-
+  
+  //await waitForElement(() => getByText(appointment, "Saving"))
   expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
   await waitForElement(() => getByText(container, "Archie Cohen"))
 
-  expect(getByText(container, "Sylvia Palmer")).toBeInTheDocument();
+  expect(getByText(container, "Sylvia Palmerr")).toBeInTheDocument();
 
   const day = getAllByTestId(container, "day").find(day => 
     queryByText(day, "Monday")

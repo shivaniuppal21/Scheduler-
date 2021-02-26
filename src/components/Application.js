@@ -1,14 +1,14 @@
 import React from 'react';
 import DayList from "./DayList";
 import "./Application.scss";
-import axios from 'axios'
 import Appointment from "./Appointment";
 import useApplicationData from "../hooks/useApplicationData";
 
-import { getAppointmentsForDay ,getInterview, getInterviewersForDay }   from "../helpers/selectors"
+import { getAppointmentsForDay, getInterview, getInterviewersForDay }   from "../helpers/selectors"
 
 
-export default function Application(props) {
+export default function Application() {
+  //state helps to keep data to application component which is sent as props to children 
   const {state, setDay, bookInterview, cancelInterview} = useApplicationData();
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const interviewers_schedule  = getInterviewersForDay(state, state.day);
@@ -23,7 +23,9 @@ export default function Application(props) {
         interview = {getInterview(state, appointment.interview)}
         time={appointment.time}
         interviewers={interviewers_schedule}
+        //passing bookInterview as props to Appointment component
         bookInterview={bookInterview}
+         //passing cancelInterview as props to Appointment component
         cancelInterview={cancelInterview}
       />
       )
@@ -42,7 +44,6 @@ export default function Application(props) {
         days={state.days}
         day={state.day}
         setDay={setDay}
-        
       />
       </nav>
       <img
